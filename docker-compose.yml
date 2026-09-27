@@ -1,0 +1,14 @@
+services:
+  crop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: exif-crop-studio:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
